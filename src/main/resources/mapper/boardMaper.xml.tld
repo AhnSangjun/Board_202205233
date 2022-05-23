@@ -5,8 +5,8 @@
 
 <mapper namespace="board">
     <insert id="save" parameterType="board">
-        insert into board_table(boardWriter, boardPassword, board, memberAge, memberPhone)
-        values (#{memberId}, #{memberPassword}, #{memberName}, #{memberAge}, #{memberPhone})
+        insert into board_table(boardWriter, boardPassword, boardTitle, boardContents)
+            values (#{memberId}, #{boardWriter}, #{boardPassword}, #{boardTitle}, #{boardContents})
     </insert>
 
 
