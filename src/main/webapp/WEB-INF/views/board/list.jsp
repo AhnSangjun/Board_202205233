@@ -21,14 +21,13 @@
             <th>작성자</th>
             <th>제목</th>
             <th>작성시간</th>
-            <th>작성시간(fmt적용)</th>
             <th>조회수</th>
         </tr>
         <c:forEach items="${boardList}" var="board">
             <tr>
-                <td>${boardid}</td>
-                <td>${boardlist}</td>
-                <td>${boardtitle}</td>
+                <td>${board.id}</td>
+                <td>${board.boardWriter}</td>
+                <a><a href="/board/detail?id=${board.id}" ${board.boardtitle}</a></td>
                 <td>${boardtime}</td>
             </tr>
         </c:forEach>

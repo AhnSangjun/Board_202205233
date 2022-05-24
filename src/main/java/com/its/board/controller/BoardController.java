@@ -1,16 +1,14 @@
-package com.its.board.controller.controller;
+package com.its.board.controller;
 
-import com.its.board.controller.dto.BoardDTO;
-import com.its.board.controller.service.BoardService;
+import com.its.board.dto.BoardDTO;
+import com.its.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+import java.util.List;
+
 
 @Controller
 @RequestMapping
@@ -45,5 +43,30 @@ public class BoardController {
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
         return "boardPages/list";
+    }
+
+    // 상세조회
+    @GetMapping("/detail")
+    public String findById(@RequestParam("id") Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "boardPage/detail";
+
+    }
+
+    // 비밀번호 체크 페이지
+    @GetMapping("/passwordCheck")
+    public String passwordCheck(@RequestParam("id") Long id) {
+        BoardDTO boardDTO = boardService.findById(id);
+        Model model = null;
+        model.addAttribute("board", boardDTO);
+        return "boardPage/passwordCheck";
+    }
+
+    // 삭제처리
+    @GetMapping("delete")
+    public String delete(@RequestParam("id") Long id) {
+        boardService.delete(id);
+        return "redirect:/board/findAll";
     }
 }

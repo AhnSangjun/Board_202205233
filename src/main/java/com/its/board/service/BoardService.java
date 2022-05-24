@@ -1,11 +1,12 @@
-package com.its.board.controller.service;
+package com.its.board.service;
 
-import com.its.board.controller.dto.BoardDTO;
-import com.its.board.controller.repository.BoardRepository;
+import com.its.board.dto.BoardDTO;
+import com.its.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
+import java.util.List;
+
 
 @Service
 public class BoardService {
@@ -23,5 +24,15 @@ public class BoardService {
 
     public List<BoardDTO> findAll() {
         return boardRepository.findAll();
+    }
+
+    public BoardDTO findById(Long id) {
+        // 1. 조회수 증가, 2. 상세정보 가져오기
+        boardRepository.updateHits(id);
+        return boardRepository.findById(id);
+    }
+
+    public void delete(Long id) {
+        boardRepository.delete(id);
     }
 }
